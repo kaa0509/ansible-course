@@ -18,6 +18,6 @@ Vagrant.configure('2') do |config|
     ansible.playbook = '/vagrant/provision_me.yml'
     ansible.verbose = 'v'
     ansible.install_mode = "pip3"
-    ansible.version = "2.9.18"
+    ansible.version = "2.9.27"
   end
 end
