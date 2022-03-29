@@ -21,6 +21,11 @@
         5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0\
         jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE9\
         8OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"
+    snmp_cnf:
+      community: public
+      syslocation: "Server Room"
+      syscontact: "SysAdmin (devops@exemple.com)"
+      rocommunity: snmp_secret_rocomunity
   tasks:
     - name: Create admin user
       import_tasks: provision_users.yml
@@ -30,6 +35,8 @@
       import_tasks: provision_iptables.yml
     - name: Install game 2048
       import_tasks: provision_site.yml
+    - name: Install snmmpd
+      import_tasks: provision_snmp.yml
     - name: Print message
       debug:
         msg: "Play 2028: http://localhost:8080/"

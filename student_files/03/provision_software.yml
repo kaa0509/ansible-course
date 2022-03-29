@@ -6,6 +6,9 @@
       # it's required for validating iptables configs
       - iptables
       - iptables-services
+      # it's required for snmpd
+      - net-snmp
+      - net-snmp-utils
     state: present
 - name: Install software Centos
   package:

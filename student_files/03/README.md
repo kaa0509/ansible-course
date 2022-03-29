@@ -10,3 +10,10 @@ Modify existing playbooks:
     * 443 tcp
 3. Reload iptables only if is modified.
 4. Make your playbook idempotent
+
+
+# Notice
+
+ansible execution on localhost
+
+ansible-playbook -c local -i localhost, provision_me.yml 
