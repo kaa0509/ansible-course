@@ -14,10 +14,19 @@ Vagrant.configure('2') do |config|
   end
 
   config.vm.network 'forwarded_port', guest: 80, host: 8080
+  # copy my pub key
+#  config.vm.provision "shell" do |s|
+#    ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
+#    s.inline = <<-SHELL
+#      echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
+#      sudo echo #{ssh_pub_key} >> /root/.ssh/authorized_keys
+#    SHELL
+#  end
+
   config.vm.provision 'ansible_local' do |ansible|
     ansible.playbook = '/vagrant/provision_me.yml'
     ansible.verbose = 'v'
     ansible.install_mode = "pip3"
-    ansible.version = "2.9.18"
+    ansible.version = "2.9.27"
   end
 end
