@@ -1,0 +1,5 @@
+---
+- name: Install pip from file
+  script: "/root/get-pip.py"
+  args:
+    executable: python

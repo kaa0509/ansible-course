@@ -1,0 +1,5 @@
+---
+- name: Install snmp software
+  package:
+    name: "{{ config_snmpd_software }}"
+    state: present

@@ -1,0 +1,32 @@
+# install docker
+---
+- name: "Install requrements"
+  package:
+    name: "{{ docker_software }}"
+    state: present
+
+- name: "Add Docker repo"
+  get_url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docer-ce.repo
+  become: true
+
+- name: "Install docker"
+  package:
+    name:
+      - docker-ce
+    state: present
+  notify:
+    - restart and enable docker
+
+- name: "Add vagrant user to docker group"
+  ansible.builtin.user:
+    name: "{{ docker_user }}"
+    groups: "docker"
+    append: true
+   
+- name: "Install docker-compose"
+  ansible.builtin.get_url:
+    url: "{{ docker_compose_url }}"
+    dest: "/usr/local/bin/docker-compose"
+    mode: u+x,g+x,o+x

@@ -10,5 +10,8 @@
       - {protocol: tcp, port: 443}
       - {protocol: udp, port: 161}
   roles:
-    - role: users
-    - role: game2048
+#    - role: users
+#    - role: game2048
+#    - role: config_snmpd
+#    - role: docker
+    - role: install_molecule

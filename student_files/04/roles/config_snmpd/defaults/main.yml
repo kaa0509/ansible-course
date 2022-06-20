@@ -1,0 +1,10 @@
+---
+snmp_cnf:
+  community: public
+  syslocation: "Server Room"
+  syscontact: "SysAdmin (devops@exemple.com)"
+  rocommunity: snmp_secret_rocomunity
+
+config_snmpd_software:
+  - net-snmp
+  - net-snmp-utils

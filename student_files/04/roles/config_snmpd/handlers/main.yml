@@ -1,0 +1,7 @@
+---
+- name: restart and enable snmp
+  systemd:
+    name: snmpd
+    enabled: true
+    state: restarted
+    daemon_reload: true

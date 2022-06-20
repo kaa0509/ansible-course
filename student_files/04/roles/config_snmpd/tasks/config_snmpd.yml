@@ -1,0 +1,10 @@
+---
+- name: Configure snmp
+  template:
+    src: snmpd.conf.j2
+    dest: /etc/snmp/snmpd.conf
+    mode: 0600
+    owner: root
+    group: root
+  notify: 
+    - restart and enable snmp
