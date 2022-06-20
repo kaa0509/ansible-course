@@ -6,5 +6,5 @@
     mode: 0600
     owner: root
     group: root
-  notify: 
+  notify:
     - restart and enable snmp

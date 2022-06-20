@@ -1,8 +1,8 @@
 ---
-- name: Install snmpd 
-  import_tasks: install_snmpd.yml 
+- name: Install snmpd
+  import_tasks: install_snmpd.yml
 - name: Configure snmpd
-  import_tasks: config_snmpd.yml 
+  import_tasks: config_snmpd.yml
 - name: Print snmpd install message
   debug:
     msg: "Snmpd was installed and configured!!!"
