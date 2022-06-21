@@ -1,0 +1,12 @@
+# install pip modules for molecule for python 2.7 on centos
+---
+- name: "Update setuptools"
+  ansible.builtin.pip:
+    name: setuptools
+    extra_args: --upgrade
+  become: false
+
+- name: "Install pip modules from molecule"
+  pip:
+    name: "{{ molecule_pip_packages }}"
+  become: false

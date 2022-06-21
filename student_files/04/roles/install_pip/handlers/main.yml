@@ -1,0 +1,3 @@
+---
+- name: "install pip"
+  command: python ~/get-pip.py

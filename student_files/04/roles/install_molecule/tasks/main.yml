@@ -1,5 +1,5 @@
-- name: Install pip2 
-  import_tasks: install_pip2.yml 
+- name: Install molecule 
+  import_tasks: install_requirements.yml 
 - name: Print molecule install message
   debug:
     msg: "Molecule was installed!!!"

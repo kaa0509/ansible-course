@@ -1,2 +1,5 @@
 ---
-# defaults for install molecule role
+molecule_pip_packages:
+  - molecule
+  - docker
+  - ansible-lint

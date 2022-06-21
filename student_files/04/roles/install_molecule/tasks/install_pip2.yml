@@ -1,9 +1,0 @@
-# install pip2 on centos
----
-- name: "Install docker-compose"
-  ansible.builtin.get_url:
-    url: https://bootstrap.pypa.io/pip/2.7/get-pip.py
-    dest: "~/get-pip.py"
-    mode: u+x,g+x,o+x
-  notify:
-    - Install pip from file 
