@@ -4,9 +4,7 @@
   ansible.builtin.pip:
     name: setuptools
     extra_args: --upgrade
-  become: false
 
 - name: "Install pip modules from molecule"
   pip:
     name: "{{ molecule_pip_packages }}"
-  become: false
