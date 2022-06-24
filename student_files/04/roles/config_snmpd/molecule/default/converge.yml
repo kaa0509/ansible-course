@@ -1,5 +1,7 @@
 ---
 - name: Converge
   hosts: all
-  roles:
-    - role: config_snmpd
+  tasks:
+    - name: "Include config_snmpd"
+      include_role:
+        name: "config_snmpd"

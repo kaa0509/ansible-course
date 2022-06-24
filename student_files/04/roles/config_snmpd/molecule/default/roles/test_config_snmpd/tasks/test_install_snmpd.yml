@@ -1,0 +1,12 @@
+---
+- name: "snmp - check snmp package status"
+  package:
+    name: "net-snmp"
+    state: "installed"
+  check_mode: yes
+  register: pkg_status
+
+- name: "snmp - test snmp package is installed"
+  assert:
+    that:
+      - not pkg_status.changed

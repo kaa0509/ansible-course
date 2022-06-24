@@ -1,0 +1,5 @@
+---
+- name: "include tasks for installing testing snmp"
+  include_tasks: "test_install_snmpd.yml"
+- name: "include tasks for configuration testing snmp"
+  include_tasks: "test_config_snmpd.yml"

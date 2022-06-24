@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include iptables_provision"
+      include_role:
+        name: "iptables_provision"

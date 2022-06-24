@@ -12,6 +12,6 @@
   roles:
     - role: users
     - role: game2048
-    - role: config_snmpd
+#    - role: config_snmpd
     - role: docker
     - role: install_pip

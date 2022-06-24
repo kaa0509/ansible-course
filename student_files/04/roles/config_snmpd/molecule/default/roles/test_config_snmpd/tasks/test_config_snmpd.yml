@@ -1,0 +1,13 @@
+---
+- name: "SNMP - test snmpd.conf file"
+  block:
+    - name: "SNMP - retrieve information from path"
+      stat:
+        path:  /etc/snmp/snmpd.conf
+      register: remote_file
+    - name: "SNMP - assert that snmpd.conf file is created correctly"
+      assert:
+        that:
+          - "remote_file.stat.exists"
+          - "remote_file.stat.isreg" # is a regular file
+          - "remote_file.stat.mode == '0600'"

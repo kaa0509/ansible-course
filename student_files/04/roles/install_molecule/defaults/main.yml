@@ -3,3 +3,7 @@ molecule_pip_packages:
   - molecule
   - docker
   - ansible-lint
+  - cookiecutter
+  - html
+  - entities
+  - future
