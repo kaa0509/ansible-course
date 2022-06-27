@@ -1,0 +1,6 @@
+---
+- name: "Include task for installing test iptables"
+  include_tasks: "test_install_iptables_soft.yml"
+
+- name: "Include task for configuration test iptables"
+  include_tasks: "test_configure_iptables.yml"

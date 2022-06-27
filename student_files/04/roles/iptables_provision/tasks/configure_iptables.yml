@@ -1,8 +1,8 @@
 ---
 - name: Configure iptables
   template:
-    src: "{{ game2048__iptables_item }}.j2"
-    dest: "/etc/sysconfig/{{ game2048__iptables_item }}"
+    src: "{{ iptables_provision__iptables_item }}.j2"
+    dest: "/etc/sysconfig/{{ iptables_provision__iptables_item }}"
     force: true
     # it's commented because github actions do not allow use ip6
     # https://github.com/actions/virtual-environments/issues/668
@@ -14,7 +14,9 @@
     - iptables
     - ip6tables
   loop_control:
-    loop_var: game2048__iptables_item
+    loop_var: iptables_provision__iptables_item
   notify:
-    - game2048 reload iptables
-    - game2048 reload ip6tables
+    - iptables_provision reload iptables
+    - iptables_provision reload ip6tables
+    - restart and enable iptables
+    - restart and enable ip6tables

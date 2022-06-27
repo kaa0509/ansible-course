@@ -1,0 +1,28 @@
+---
+- name: "IPTABLES - test iptables file"
+  ignore_errors: yes
+  block:
+    - name: "IPTABLES - retrieve information from path about iptables"
+      stat:
+        path:  /etc/sysconfig/iptables
+      register: remote_file
+    - name: "IPTABLES - assert that iptables file is created correctly"
+      assert:
+        that:
+          - "remote_file.stat.exists"
+          - "remote_file.stat.isreg" # is a regular file
+          - "remote_file.stat.mode == '0644'"
+
+- name: "IPTABLES - test iptables6 file"
+  ignore_errors: yes
+  block:
+    - name: "IPTABLES - retrieve information from path about ip6tables"
+      stat:
+        path:  /etc/sysconfig/ip6tables
+      register: remote_file2
+    - name: "IPTABLES - assert that ip6tables file is created correctly"
+      assert:
+        that:
+          - "remote_file2.stat.exists"
+          - "remote_file2.stat.isreg" # is a regular file
+          - "remote_file2.stat.mode == '0644'"

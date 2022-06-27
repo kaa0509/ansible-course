@@ -1,2 +1,8 @@
 ---
 # defaults file for iptables_provision
+iptables_provision__software:
+  - iptables
+  - iptables-services
+
+iptables_provision__iptables_allowed_ports:
+  - {protocol: tcp, port: 80}

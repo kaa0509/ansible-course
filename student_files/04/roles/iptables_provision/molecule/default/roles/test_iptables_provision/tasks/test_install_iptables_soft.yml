@@ -1,0 +1,24 @@
+---
+- name: "iptables - check iptables package status"
+  package:
+    name: "iptables"
+    state: "installed"
+  check_mode: yes
+  register: pkg_status
+
+- name: "iptables - test iptables package is installed"
+  assert:
+    that:
+      - not pkg_status.changed
+
+- name: "iptables - check iptables-services package status"
+  package:
+    name: "iptables-services"
+    state: "installed"
+  check_mode: yes
+  register: pkg_status
+
+- name: "iptables - test iptables-services package is installed"
+  assert:
+    that:
+      - not pkg_status.changed

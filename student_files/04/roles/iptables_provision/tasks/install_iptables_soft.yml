@@ -1,0 +1,9 @@
+---
+- name: Install iptables software
+  package:
+    name: "{{ iptables_provision__software }}"
+    state: present
+  retries: 30
+  delay: 5
+  register: result
+  until: result is not failed
