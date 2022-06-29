@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  become: true
+  become_user: root
+  roles:
+    - role: apply_iptables_module
+  tasks:
+    - name: Execute apply_iptables module for iptables
+      apply_iptables:
+        name: iptables
+        path: /vagrant/test_iptables
+      register: result_apply_iptables
+    - name: Print custom apply_iptables module result for iptables
+      debug:
+        var: result_apply_iptables
+    - name: Execute custom apply_iptables module for ip6tables
+      apply_iptables:
+        name: ip6tables
+        path: /etc/sysconfig/ip6tables
+      register: apply_ip6tables_result
+    - name: Print custom apply_iptables module result for ip6tables
+      debug:
+        var: apply_ip6tables_result
