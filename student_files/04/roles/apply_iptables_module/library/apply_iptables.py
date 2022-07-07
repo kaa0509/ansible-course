@@ -12,9 +12,9 @@ def restore(command, syspath):
         cmd = command + "-restore " + syspath
         try:
             os.system(cmd)
-            return {"changed":True}
         except Exception as e:
             return {"changed":False, "error":e}
+        return {"changed":True}
 
 def compare_files(syspath, path):
     file1 = open(syspath, "r")
