@@ -1,7 +1,8 @@
 ---
 # tasks file for iptables_provision
+
 - name: "Install iptables software"
   import_tasks: install_iptables_soft.yml
 
-#- name: "Configure iptables"
-#  import_tasks: configure_iptables.yml
+- name: "Configure iptables"
+  import_tasks: configure_iptables.yml

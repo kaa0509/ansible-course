@@ -1,0 +1,29 @@
+---
+# handlers file for iptables_provision
+
+- name: iptables_provision reload iptables
+  command: iptables-restore /etc/sysconfig/iptables
+  when:
+    # should be removed after releasing https://github.com/ansible/ansible/issues/66304
+    - ansible_virtualization_type != "docker"
+    - ansible_virtualization_type != "VirtualPC"
+- name: iptables_provision reload ip6tables
+  command: ip6tables-restore /etc/sysconfig/ip6tables
+  when:
+    # should be removed after releasing https://github.com/ansible/ansible/issues/66304
+    - ansible_virtualization_type != "docker"
+    - ansible_virtualization_type != "VirtualPC"
+
+- name: restart and enable iptables
+  systemd:
+    name: iptables
+    enabled: true
+    state: restarted
+    daemon_reload: true
+
+- name: restart and enable ip6tables
+  systemd:
+    name: ip6tables
+    enabled: true
+    state: restarted
+    daemon_reload: true
