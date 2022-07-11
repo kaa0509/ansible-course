@@ -6,15 +6,14 @@
 import os
 import filecmp
 import shutil
+import sys
 from ansible.module_utils.basic import AnsibleModule
 
 def restore(command, syspath):
         cmd = command + "-restore " + syspath
-        try:
-            os.system(cmd)
-            return {"changed":True}
-        except Exception as e:
-            return {"changed":False, "error":e}
+        if os.system(cmd) != 0:
+            return False
+        return True
 
 def compare_files(syspath, path):
     file1 = open(syspath, "r")
@@ -35,8 +34,10 @@ def compare_files(syspath, path):
 def change_file(syspath, path):
     try:
         shutil.copy(path, syspath)
+        return {"compleet": True, "error":""}
     except Exception as e:
-        return {"changed":False, "error":e}
+        print("It's error", e)
+        return {"compleet":False, "error":e}
 
 
 def main():
@@ -71,19 +72,44 @@ def main():
         if command == 'iptables':
             syspath = '/etc/sysconfig/iptables'
             if syspath == path:
-                result = restore(command, syspath)
+                result_cmd = restore(command, syspath)
+                if result_cmd:
+                    result = {"changed": True}
+                else:
+                    return module.fail_json(msg="Houston we have a problem, please check permisiion to iptables command")
+
             else:
                 if not compare_files(syspath, path):
-                    change_file(syspath, path)
-                    result = restore(command, syspath)
+                    result_cf  = change_file(syspath, path)
+                    if result_cf["compleet"]:
+                        result_cmd = restore(command, syspath)
+                        if result_cmd:
+                            result = {"changed": True}
+                        else:
+                            return module.fail_json(msg="Houston we have a problem, please check permisiion to iptables command")
+                    else:
+                        return module.fail_json(msg=str(result_cf["error"]))
+
+        
         elif command == 'ip6tables':
             syspath = '/etc/sysconfig/ip6tables'
             if syspath == path:
-                result = restore(command, syspath)
+                result_cmd = restore(command, syspath)
+                if result_cmd:
+                    result = {"changed": True}
+                else:
+                    return module.fail_json(msg="Houston we have a problem, please check permisiion to iptables command")
             else:
                 if not compare_files(syspath, path):
-                    change_file(syspath, path)
-                    result = restore(command, syspath)                 
+                    result_cf = change_file(syspath, path)
+                    if result_cf["compleet"]:
+                        result_cmd = restore(command, syspath)                 
+                        if result_cmd:
+                            result = {"changed": True}
+                        else:
+                            return module.fail_json(msg="Houston we have a problem, please check permisiion to iptables command")
+                    else:
+                        return module.fail_json(msg=str(result_cf["error"]))
         else:
             return module.fail_json(msg='Name must be iptables or ip6tables')
     else:
